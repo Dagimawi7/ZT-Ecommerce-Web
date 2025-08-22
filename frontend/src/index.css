@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+/* Shows the underline (<hr>) only for the active link in the navbar */
+a.active hr{
+    display: block;
+}
