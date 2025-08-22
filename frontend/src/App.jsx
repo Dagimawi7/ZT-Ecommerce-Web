@@ -11,6 +11,7 @@ import PlaceOrder from './pages/PlaceOrder'
 import Orders from './pages/Orders'
 import Navbar from './components/Navbar'
 
+
 const App = () => {
   return (
     // provided the padding x for different screen sizes small, med & large
