@@ -4,6 +4,7 @@ import {assets} from '../assets/assets.js'
 import { NavLink, Link } from 'react-router-dom'
 // NavLink lets us create clickable links that change the page without reload
 import {useState} from 'react';
+import Hero from './Hero.jsx'
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
