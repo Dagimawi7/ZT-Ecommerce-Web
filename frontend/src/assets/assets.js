@@ -1,12 +1,14 @@
 import ztlogo from './ztlogo.png'
 import search from './search.png'
 import profile from './profile.png'
+import cart from './cart.png'
 
 
 export const assets ={
     ztlogo, 
     search,
     profile,
+    cart,
 }
 // we export it so we can use this assets in other files
 // assets is an object that stores images under keys
