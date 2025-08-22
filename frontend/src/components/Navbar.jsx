@@ -39,8 +39,16 @@ const Navbar = () => {
             <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
           </NavLink>
         </ul>
+        {/* Row with search and profile icons in the navbar */}
+        <div className='flex items-center gap-6'>
+           {/* Search icon */}
+          <img src={assets.search} className='w-5 cursor-pointer' alt="" />
+           {/* Profile icon */}
+          <div className='group relative'>
+            <img className='w-5 cursor-pointer' src={assets.profile} alt="" />
+          </div>
+        </div>
 
-        
     </div>
   )
 }
