@@ -9,12 +9,14 @@ import Cart from './pages/Cart'
 import Login from './pages/Login'
 import PlaceOrder from './pages/PlaceOrder'
 import Orders from './pages/Orders'
+import Navbar from './components/Navbar'
 
 const App = () => {
   return (
     // provided the padding x for different screen sizes small, med & large
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
     {/* Routes holds all the pages that I created */}
+      <Navbar />  {/* puts all the routes in the navbar of the web*/}
       <Routes>
         {/*Routes decides where to go. 9 routes for 9 pages */}
         <Route path='/' element={<Home/>}/>
