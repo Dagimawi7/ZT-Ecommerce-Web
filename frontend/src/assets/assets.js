@@ -4,6 +4,7 @@ import profile from './profile.png'
 import cart from './cart.png'
 import menu from './menu.png'
 import down from './down.png'
+import board from './board.avif'
 
 
 export const assets ={
@@ -13,6 +14,7 @@ export const assets ={
     cart,
     menu,
     down,
+    board,
 }
 // we export it so we can use this assets in other files
 // assets is an object that stores images under keys
