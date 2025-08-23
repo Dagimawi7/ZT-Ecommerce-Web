@@ -4,6 +4,7 @@ import { products } from "../assets/assets";
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
+
     // Define values we want to share: currency and delivery fee.
     const currency = '$';
     const delivery_fee = 10;
@@ -13,9 +14,9 @@ const ShopContextProvider = (props) => {
         products, currency, delivery_fee
     }
     return (
-        <ShopContextProvider value={value}>
+        <ShopContext.Provider value={value}>
             {props.children}
-        </ShopContextProvider>
+        </ShopContext.Provider>
     )
 }
 
