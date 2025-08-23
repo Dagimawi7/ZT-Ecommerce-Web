@@ -1,6 +1,19 @@
+/* google font*/
+@import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 @import "tailwindcss";
 
 /* Shows the underline (<hr>) only for the active link in the navbar */
 a.active hr{
     display: block;
 }
+*{
+    font-family: Libre Baskerville;
+}
+/*font*/
+.libre-baskerville-regular {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+  
