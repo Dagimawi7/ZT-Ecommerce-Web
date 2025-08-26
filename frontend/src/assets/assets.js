@@ -5,6 +5,7 @@ import cart from './cart.png'
 import menu from './menu.png'
 import down from './down.png'
 import board from './board.avif'
+import ars from './ars.png'
 
 
 export const assets ={
@@ -15,6 +16,7 @@ export const assets ={
     menu,
     down,
     board,
+    ars,
 }
 // we export it so we can use this assets in other files
 // assets is an object that stores images under keys
@@ -22,13 +24,13 @@ export const products = [
     // we put our here 
     {
         // product 1
-        _id: "aaa",
-        name : "women Round Neck Cotton Top",
-        description: " A light weigth",
+        _id: "Arsenal Away Jersey",
+        name : "Long sleeve and short",
+        description: " A light weigth blue jersey",
         price: 100,
         // can display multiple images for one product
-        image: [],
-        category: "Women",
+        image: [ars],
+        category: "Neutral",
         subCategory: "Topwear",
         sizes: ["S", "M", "L"],
         date: 1716634345448,
