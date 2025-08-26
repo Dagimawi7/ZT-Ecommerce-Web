@@ -6,6 +6,8 @@ import menu from './menu.png'
 import down from './down.png'
 import board from './board.avif'
 import ars from './ars.png'
+import ars3 from './ars3.png'
+import liv from './liv.png'
 
 
 export const assets ={
@@ -17,6 +19,8 @@ export const assets ={
     down,
     board,
     ars,
+    ars3,
+    liv,
 }
 // we export it so we can use this assets in other files
 // assets is an object that stores images under keys
@@ -30,6 +34,34 @@ export const products = [
         price: 100,
         // can display multiple images for one product
         image: [ars],
+        category: "Neutral",
+        subCategory: "Topwear",
+        sizes: ["S", "M", "L"],
+        date: 1716634345448,
+        bestseller: true,
+    },
+    {
+        // product 2
+        _id: "Arsenal 3rd Jersey",
+        name : "Long sleeve and short",
+        description: " A light weigth blue jersey",
+        price: 100,
+        // can display multiple images for one product
+        image: [ars3],
+        category: "Neutral",
+        subCategory: "Topwear",
+        sizes: ["S", "M", "L"],
+        date: 1716634345448,
+        bestseller: true,
+    },
+    {
+        // product 2
+        _id: "Liverpool Home Jersey",
+        name : "Long sleeve and short",
+        description: " A light weigth blue jersey",
+        price: 100,
+        // can display multiple images for one product
+        image: [liv],
         category: "Neutral",
         subCategory: "Topwear",
         sizes: ["S", "M", "L"],
