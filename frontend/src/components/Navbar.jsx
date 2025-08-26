@@ -18,7 +18,7 @@ const Navbar = () => {
     // "font-medium" → medium text weight
     <div className='flex items-center justify-between py-5 font-medium'>
 
-        <img src={assets.ztlogo} className='w-36' alt="brand logo" />
+        <Link to='/'><img src={assets.ztlogo} className='w-36' alt="brand logo" /></Link>
         {/* Navigation links (menu) */}
         {/* hidden on very small screens, visible on sm+ screens */}
         {/* gap-5 → space between items */}
