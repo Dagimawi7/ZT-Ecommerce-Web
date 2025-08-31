@@ -8,6 +8,9 @@ import board from './board.avif'
 import ars from './ars.png'
 import ars3 from './ars3.png'
 import liv from './liv.png'
+import exchange from './exchange.png'
+import quality from './quality.png'
+import custom from './custom.png'
 
 
 export const assets ={
@@ -21,6 +24,9 @@ export const assets ={
     ars,
     ars3,
     liv,
+    exchange,
+    quality,
+    custom,
 }
 // we export it so we can use this assets in other files
 // assets is an object that stores images under keys
