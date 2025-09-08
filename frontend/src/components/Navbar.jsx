@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {assets} from '../assets/assets.js'
 // import images like logo from assets file
 import { NavLink, Link } from 'react-router-dom'
 // NavLink lets us create clickable links that change the page without reload
 import {useState} from 'react';
 import Hero from './Hero.jsx'
+import { ShopContext } from '../context/ShopContext.jsx';
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
+
+  const {setShowSearch} = useContext(ShopContext);
+
   return (
     // a flexbox container that spaces items evenly
     // main navbar container
@@ -45,7 +49,7 @@ const Navbar = () => {
         {/* Row with search and profile icons in the navbar */}
         <div className='flex items-center gap-6'>
               {/* Search icon */}
-              <img src={assets.search} className='w-5 cursor-pointer' alt="search icon" />
+              <img onClick={()=>setShowSearch(true)} src={assets.search} className='w-5 cursor-pointer' alt="search icon" />
 
               {/* Profile icon */}
               {/* Profile icon with a dropdown menu - When you hover over the profile icon, the dropdown appears */}
