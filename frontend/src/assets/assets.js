@@ -11,6 +11,7 @@ import liv from './liv.png'
 import exchange from './exchange.png'
 import quality from './quality.png'
 import custom from './custom.png'
+import dropdown from './dropdown.png'
 
 
 export const assets ={
@@ -27,6 +28,7 @@ export const assets ={
     exchange,
     quality,
     custom,
+    dropdown,
 }
 // we export it so we can use this assets in other files
 // assets is an object that stores images under keys
@@ -37,7 +39,7 @@ export const products = [
         _id: "Arsenal Away Jersey",
         name : "Long sleeve and short",
         description: " A light weigth blue jersey",
-        price: 100,
+        price: 90,
         // can display multiple images for one product
         image: [ars],
         category: "Neutral",
@@ -51,7 +53,7 @@ export const products = [
         _id: "Arsenal 3rd Jersey",
         name : "Long sleeve and short",
         description: " A light weigth blue jersey",
-        price: 100,
+        price: 120,
         // can display multiple images for one product
         image: [ars3],
         category: "Neutral",
