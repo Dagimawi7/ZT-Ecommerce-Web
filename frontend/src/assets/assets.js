@@ -12,6 +12,8 @@ import exchange from './exchange.png'
 import quality from './quality.png'
 import custom from './custom.png'
 import dropdown from './dropdown.png'
+import cross from './cross.png'
+
 
 
 export const assets ={
@@ -29,6 +31,7 @@ export const assets ={
     quality,
     custom,
     dropdown,
+    cross,
 }
 // we export it so we can use this assets in other files
 // assets is an object that stores images under keys

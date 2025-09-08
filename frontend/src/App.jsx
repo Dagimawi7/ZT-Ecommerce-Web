@@ -11,6 +11,7 @@ import PlaceOrder from './pages/PlaceOrder'
 import Orders from './pages/Orders'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import SearchBar from './components/SearchBar';
 
 
 
@@ -20,6 +21,7 @@ const App = () => {
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
     {/* Routes holds all the pages that I created */}
       <Navbar />  {/* puts all the routes in the navbar of the web*/}
+      <SearchBar /> 
       <Routes>
         {/*Routes decides where to go. 9 routes for 9 pages */}
         <Route path='/' element={<Home/>}/>
