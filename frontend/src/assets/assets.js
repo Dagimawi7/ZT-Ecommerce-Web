@@ -40,7 +40,7 @@ export const products = [
     {
         // product 1
         _id: "Arsenal Away Jersey",
-        name : "Long sleeve and short",
+        name : "Arsenal Away Jersey",
         description: " A light weigth blue jersey",
         price: 90,
         // can display multiple images for one product
