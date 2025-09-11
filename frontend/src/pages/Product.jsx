@@ -81,7 +81,19 @@ const Product = () => {
       </div>
 
       {/* :::: Description & review section */}
+      <div className='mt-20'>
+        <div className='flex'>
+          <b className='border px-5 py-3 text-sm'>Description</b>
+          <p className='border px-5 py-3 text-sm'>Reviews (100)</p>
+        </div>
+        <div className='flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500'>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor porta sapien ut elementum. Mauris augue sem, fringilla eget accumsan non, auctor ac ante. Integer sed tortor tortor. Integer a sapien sit amet tortor fermentum gravida.</p>
+          <p>description of the item</p>
+        </div>
+      </div>
 
+      {/* :::: display related products */}
+      
     </div>
   ) : <div className=' opacity-0'></div>
 }
