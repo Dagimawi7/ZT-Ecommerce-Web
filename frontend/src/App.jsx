@@ -12,6 +12,7 @@ import Orders from './pages/Orders'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import SearchBar from './components/SearchBar';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -20,6 +21,7 @@ const App = () => {
     // provided the padding x for different screen sizes small, med & large
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
     {/* Routes holds all the pages that I created */}
+    <ToastContainer />
       <Navbar />  {/* puts all the routes in the navbar of the web*/}
       <SearchBar /> 
       <Routes>
