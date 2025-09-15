@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { products } from "../assets/assets";
+import { toast } from "react-toastify";
 
 export const ShopContext = createContext();
 
@@ -16,6 +17,11 @@ const ShopContextProvider = (props) => {
     // Add an item to the cart
     // Takes the item ID and size
     const addToCart = async (itemId,size) =>{
+
+        if (!size){
+            toast.error('Select Product Size');
+            return;
+        }
         // Make a copy of the current cart so we don’t change state directly
         let cartData = structuredClone(cartItems);
          // If the item is already in the cart
@@ -37,16 +43,30 @@ const ShopContextProvider = (props) => {
          // Save the updated cart
         setCartItems(cartData)
     }
-    // Watch the cart and print it every time it changes
-    useEffect(()=>{
-        console.log(cartItems)
-    },[cartItems])
+
+
+    const getCartCount = () => {
+        let totalCount = 0;
+        for(const items in cartItems){
+            for(const item in cartItems[items]){
+               try {
+                if (cartItems[items][item] > 0){
+                    totalCount += cartItems[items][item];
+                }
+               } catch (error) {
+                
+               } 
+            }
+        }
+        return totalCount;
+    }
 
     // Put all values we want to share inside one object.
     const value = {
         products, currency, delivery_fee,
         search, setSearch, showSearch, setShowSearch,
-        cartItems,addToCart
+        cartItems,addToCart,
+        getCartCount
     }
     return (
         <ShopContext.Provider value={value}>
