@@ -16,6 +16,7 @@ import cross from './cross.png'
 import ars2 from './ars2.webp'
 import star from './star.png'
 import hstar from './hstar.png'
+import bin from './bin.png'
 
 
 
@@ -38,6 +39,7 @@ export const assets ={
     ars2,
     star,
     hstar,
+    bin,
 }
 // we export it so we can use this assets in other files
 // assets is an object that stores images under keys
