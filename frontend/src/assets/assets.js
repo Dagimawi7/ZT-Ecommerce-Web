@@ -17,6 +17,11 @@ import ars2 from './ars2.webp'
 import star from './star.png'
 import hstar from './hstar.png'
 import bin from './bin.png'
+import stripe from './stripe.png'
+import credit from './credit.png'
+import paypal from './paypal.png'
+import klarna from './klarna.svg'
+import google from './google.png'
 
 
 
@@ -40,6 +45,11 @@ export const assets ={
     star,
     hstar,
     bin,
+    stripe,
+    credit,
+    paypal,
+    klarna,
+    google,
 }
 // we export it so we can use this assets in other files
 // assets is an object that stores images under keys
