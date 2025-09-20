@@ -23,6 +23,7 @@ import paypal from './paypal.png'
 import klarna from './klarna.svg'
 import google from './google.png'
 import about from './about.avif'
+import Contact from './Contact.jpeg'
 
 
 
@@ -52,6 +53,7 @@ export const assets ={
     klarna,
     google,
     about,
+    Contact,
 }
 // we export it so we can use this assets in other files
 // assets is an object that stores images under keys
