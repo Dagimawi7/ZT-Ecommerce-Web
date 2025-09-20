@@ -55,7 +55,7 @@ const Navbar = () => {
               {/* Profile icon with a dropdown menu - When you hover over the profile icon, the dropdown appears */}
               <div className='group relative'>
                   {/* Profile icon that you can click */}
-                <img className='w-5 cursor-pointer' src={assets.profile} alt="profile icon" />
+                <Link to='/login'><img className='w-5 cursor-pointer' src={assets.profile} alt="profile icon" /></Link>
                 {/* Dropdown menu that shows on hover */}
                 <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
                   {/* Menu items inside the dropdown */}
