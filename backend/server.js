@@ -5,12 +5,16 @@
 import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
+import connectDB from './config/mongodb.js'
+import connectCloudinary from './config/cloudinary.js'
 
 // App Config
 // Create an Express app
 const app = express()
 // Set the port for server to listen on (from environment or default 4000)
 const port = process.env.PORT || 4000
+connectDB()
+connectCloudinary()
 
 // Middleware
 // Allows backend to parse JSON data sent from frontend
