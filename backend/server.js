@@ -7,6 +7,7 @@ import cors from 'cors'
 import 'dotenv/config'
 import connectDB from './config/mongodb.js'
 import connectCloudinary from './config/cloudinary.js'
+import userRouter from './routes/userRoute.js'
 
 // App Config
 // Create an Express app
@@ -23,6 +24,8 @@ app.use(express.json())
 app.use(cors())
 
 // API Endpoints
+app.use('/api/user',userRouter)
+
 // Create a GET route at '/' that sends a message back
 app.get('/', (req, res) => {
     res.send("API WORKING") // Send simple response to show server is running
