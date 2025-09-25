@@ -10,7 +10,7 @@ const connectDB = async () => {
     })
 
     // Connect to MongoDB using the URI from .env file and 'e-commerce' database
-    await mongoose.connect(`${process.env.MONGODB_URI}/e-commerce`)
+    await mongoose.connect(`${process.env.MONGODB_URI}`)
 }
 
 // Export the connectDB function to use it in other files
