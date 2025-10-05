@@ -5,15 +5,18 @@
 import mongoose from "mongoose";
 
 // Define the structure (schema) of a user
-const userSchema = new mongoose.Schema({
-    name: { type: String, required: true },          // User's name (required)
-    email: { type: String, required: true, unique: true },  // User's email (required and must be unique)
-    password: { type: String, required: true },      // User's password (required)
-    cartData: { type: Object, default: {} },         // Stores shopping cart info (default is empty object)
-}, { minimize: false });  // Keep empty objects in the database instead of removing them
+const userSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true }, // User's name (required)
+    email: { type: String, required: true, unique: true }, // User's email (required and must be unique)
+    password: { type: String, required: true }, // User's password (required)
+    cartData: { type: Object, default: {} }, // Stores shopping cart info (default is empty object)
+  },
+  { minimize: false }
+); // Keep empty objects in the database instead of removing them
 
 // Create a model from the schema, or use an existing one if already defined
-const userModel = mongoose.models.user || mongoose.model('user', userSchema);
+const userModel = mongoose.models.user || mongoose.model("user", userSchema);
 
 // Export the model to use it in other files
 export default userModel;

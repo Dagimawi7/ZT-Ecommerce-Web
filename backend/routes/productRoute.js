@@ -6,12 +6,13 @@ import {
   removeProduct,
   singleProduct,
 } from "../controllers/productController";
+import upload from "../middleware/multer";
 
 // Creating a new router for handling product-related routes
 const productRouter = express.Router();
 
-// Route to add a new product (POST request)
-productRouter.post("/add", addProduct);
+// Route to add a new product with up to 4 uploaded images
+productRouter.post("/add",upload.fields([{name:'image1', maxCount:1},{name:'image2', maxCount:1}, {name:'image3', maxCount:1},{name:'image4', maxCount:1} ]),addProduct);
 
 // Route to remove a product (POST request)
 productRouter.post("/remove", removeProduct);
