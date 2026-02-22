@@ -4,23 +4,14 @@ import Title from './Title';
 import { Link } from 'react-router-dom';
 
 const OnSale = () => {
-    const { backendUrl, currency } = useContext(ShopContext);
+    const { products, currency } = useContext(ShopContext);
     const [saleProducts, setSaleProducts] = useState([]);
 
     useEffect(() => {
-        const fetchSale = async () => {
-            try {
-                const response = await fetch(`${backendUrl}/api/product/on-sale`);
-                const data = await response.json();
-                if (data.success) {
-                    setSaleProducts(data.products.slice(0, 4));
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchSale();
-    }, [backendUrl]);
+        if (products && products.length > 0) {
+            setSaleProducts(products.filter(item => item.onSale).slice(0, 4));
+        }
+    }, [products]);
 
     if (saleProducts.length === 0) return null;
 

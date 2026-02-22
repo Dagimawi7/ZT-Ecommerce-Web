@@ -1,73 +1,10 @@
-import ztlogo from './ztlogo.png'
-import search from './search.png'
-import profile from './profile.png'
-import cart from './cart.png'
-import menu from './menu.png'
-import down from './down.png'
-import board from './board.avif'
-import ars from './ars.png'
-import ars3 from './ars3.png'
-import liv from './liv.png'
-import exchange from './exchange.png'
-import quality from './quality.png'
-import custom from './custom.png'
-import dropdown from './dropdown.png'
-import cross from './cross.png'
-import ars2 from './ars2.webp'
-import star from './star.png'
-import hstar from './hstar.png'
-import bin from './bin.png'
-import stripe from './stripe.png'
-import credit from './credit.png'
-import paypal from './paypal.png'
-import klarna from './klarna.svg'
-import google from './google.png'
-import about from './about.avif'
-import Contact from './Contact.jpeg'
-import image1 from './image1.png'
-import image2 from './image2.png'
-import image3 from './image3.png'
-import image4 from './image4.png'
+import mongoose from "mongoose";
+import "dotenv/config";
+import connectDB from "./config/mongodb.js";
+import productModel from "./models/productModel.js";
 
-
-
-export const assets = {
-    ztlogo,
-    search,
-    profile,
-    cart,
-    menu,
-    down,
-    board,
-    ars,
-    ars3,
-    liv,
-    exchange,
-    quality,
-    custom,
-    dropdown,
-    cross,
-    ars2,
-    star,
-    hstar,
-    bin,
-    stripe,
-    credit,
-    paypal,
-    klarna,
-    google,
-    about,
-    Contact,
-    image1,
-    image2,
-    image3,
-    image4,
-}
-// we export it so we can use this assets in other files
-// assets is an object that stores images under keys
-export const products = [
+const seedProducts = [
     {
-        _id: "Pro_Elite_Firm_Ground_Cleats",
         name: "Pro Elite Firm Ground Cleats",
         description: "Professional grade soccer cleats designed for maximum agility and speed on firm grass.",
         price: 220,
@@ -76,7 +13,7 @@ export const products = [
         subCategory: "Footwear",
         sizes: ["8", "9", "10", "11", "12"],
         bestseller: true,
-        date: 1716634345448,
+        date: Date.now(),
         salePrice: 180,
         onSale: true,
         featured: true,
@@ -84,8 +21,7 @@ export const products = [
         memberPrice: 170
     },
     {
-        _id: "Madrid_Home_Authentic_Jersey",
-        name: "Madrid Home Authentic Jersey",
+        name: "Madrid Home Authentic Jersey 24/25",
         description: "Official white home jersey, crafted with breathable moisture-wicking technology.",
         price: 130,
         image: ["https://images.unsplash.com/photo-1614631446501-abcf76949eca?q=80&w=800&auto=format&fit=crop"],
@@ -93,7 +29,7 @@ export const products = [
         subCategory: "Topwear",
         sizes: ["S", "M", "L", "XL"],
         bestseller: true,
-        date: 1716634345449,
+        date: Date.now(),
         salePrice: null,
         onSale: false,
         featured: true,
@@ -101,7 +37,6 @@ export const products = [
         memberPrice: 115
     },
     {
-        _id: "Catalunya_Away_Kit",
         name: "Catalunya Away Kit",
         description: "Vibrant yellow away kit jersey, designed for the ultimate fan experience.",
         price: 90,
@@ -110,7 +45,7 @@ export const products = [
         subCategory: "Topwear",
         sizes: ["M", "L", "XL"],
         bestseller: false,
-        date: 1716634345450,
+        date: Date.now(),
         salePrice: 75,
         onSale: true,
         featured: false,
@@ -118,7 +53,6 @@ export const products = [
         memberPrice: 70
     },
     {
-        _id: "Grip_Match_Socks",
         name: "Grip+ Match Socks",
         description: "High-performance compression socks with anti-slip grip technology on the sole.",
         price: 35,
@@ -127,7 +61,7 @@ export const products = [
         subCategory: "Bottomwear",
         sizes: ["S", "M", "L"],
         bestseller: true,
-        date: 1716634345451,
+        date: Date.now(),
         salePrice: null,
         onSale: false,
         featured: false,
@@ -135,7 +69,6 @@ export const products = [
         memberPrice: 28
     },
     {
-        _id: "Elite_Training_Tracksuit",
         name: "Elite Training Tracksuit",
         description: "Lightweight, aerodynamic tracksuit perfect for pre-game warmups and cold weather training.",
         price: 110,
@@ -144,7 +77,7 @@ export const products = [
         subCategory: "Topwear",
         sizes: ["S", "M", "L"],
         bestseller: false,
-        date: 1716634345452,
+        date: Date.now(),
         salePrice: 85,
         onSale: true,
         featured: true,
@@ -152,16 +85,15 @@ export const products = [
         memberPrice: 80
     },
     {
-        _id: "Phantom_Pro_Goalkeeper_Gloves",
         name: "Phantom Pro Goalkeeper Gloves",
         description: "Professional match gloves featuring 4mm latex for superior grip and finger protection spines.",
         price: 150,
         image: ["https://images.unsplash.com/photo-1550810359-994af509bbbd?q=80&w=800&auto=format&fit=crop"],
-        Category: "Accessories",
+        Category: "Gear",
         subCategory: "Accessories",
         sizes: ["8", "9", "10", "11"],
         bestseller: true,
-        date: 1716634345453,
+        date: Date.now(),
         salePrice: null,
         onSale: false,
         featured: true,
@@ -169,16 +101,15 @@ export const products = [
         memberPrice: 130
     },
     {
-        _id: "UCL_Official_Match_Ball",
         name: "UCL Official Match Ball",
         description: "Seamless match ball used in the greatest European nights. Unpredictable flight, precision control.",
         price: 160,
         image: ["https://images.unsplash.com/photo-1614838644349-f4adcf3c3a96?q=80&w=800&auto=format&fit=crop"],
-        Category: "Accessories",
+        Category: "Gear",
         subCategory: "Accessories",
         sizes: ["5"],
         bestseller: true,
-        date: 1716634345454,
+        date: Date.now(),
         salePrice: 120,
         onSale: true,
         featured: true,
@@ -186,16 +117,15 @@ export const products = [
         memberPrice: 110
     },
     {
-        _id: "Agility_Training_Cones",
-        name: "Agility Training Cones",
+        name: "Agility Training Cones (Set of 20)",
         description: "High-visibility, durable training cones for building speed, agility, and quick direction changes.",
         price: 25,
         image: ["https://images.unsplash.com/photo-1574629810360-7efbb1925713?q=80&w=800&auto=format&fit=crop"],
-        Category: "Accessories",
+        Category: "Gear",
         subCategory: "Accessories",
         sizes: ["One Size"],
         bestseller: false,
-        date: 1716634345455,
+        date: Date.now(),
         salePrice: null,
         onSale: false,
         featured: false,
@@ -203,16 +133,15 @@ export const products = [
         memberPrice: 20
     },
     {
-        _id: "Carbon_Fiber_Shin_Guards",
         name: "Carbon Fiber Shin Guards",
         description: "Ultra-lightweight carbon fiber shin guards offering maximum impact protection without the bulk.",
         price: 60,
         image: ["https://images.unsplash.com/photo-1624880357913-a8539238165b?q=80&w=800&auto=format&fit=crop"],
-        Category: "Accessories",
+        Category: "Gear",
         subCategory: "Accessories",
         sizes: ["S", "M", "L"],
         bestseller: false,
-        date: 1716634345456,
+        date: Date.now(),
         salePrice: 45,
         onSale: true,
         featured: false,
@@ -220,7 +149,6 @@ export const products = [
         memberPrice: 40
     },
     {
-        _id: "Astro_Turf_Legend_Shoes",
         name: "Astro Turf Legend Shoes",
         description: "Classic turf shoes engineered with a specialized rubber outsole for synthetic surfaces.",
         price: 85,
@@ -229,7 +157,7 @@ export const products = [
         subCategory: "Footwear",
         sizes: ["7", "8", "9", "10", "11"],
         bestseller: true,
-        date: 1716634345457,
+        date: Date.now(),
         salePrice: null,
         onSale: false,
         featured: false,
@@ -237,3 +165,24 @@ export const products = [
         memberPrice: 75
     }
 ];
+
+const seedDB = async () => {
+    try {
+        await connectDB();
+        console.log("Connected to MongoDB.");
+
+        console.log("Deleting existing products...");
+        await productModel.deleteMany({});
+
+        console.log("Inserting new soccer products...");
+        await productModel.insertMany(seedProducts);
+
+        console.log("Database successfully seeded!");
+        process.exit(0);
+    } catch (error) {
+        console.error("Error seeding the database:", error);
+        process.exit(1);
+    }
+};
+
+seedDB();
