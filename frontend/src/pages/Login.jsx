@@ -1,47 +1,82 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { ShopContext } from '../context/ShopContext'
+import { toast } from 'react-toastify'
 
 const Login = () => {
 
-  // State to keep track if user is on "Login" or "Sign Up"
-  const [currentState, setCurrentState] = useState('Sign Up');
+  const [currentState, setCurrentState] = useState('Login');
+  const { token, setToken, navigate, backendUrl, setUser } = useContext(ShopContext);
 
-   // Function to handle form submit (stops page from refreshing)
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+    try {
+      let url = backendUrl + "/api/user/login";
+      let bodyData = { email, password };
+
+      if (currentState === 'Sign Up') {
+        url = backendUrl + "/api/user/register";
+        bodyData = { name, email, password };
+      }
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(bodyData)
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        setToken(data.token);
+        setUser(data.user);
+        localStorage.setItem("token", data.token);
+        navigate("/");
+        toast.success(currentState === 'Login' ? "Logged in successfully" : "Account created successfully");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
   }
 
-// What will show on the screen
+  // Redirect if already logged in
+  useEffect(() => {
+    if (token) {
+      navigate('/')
+    }
+  }, [token, navigate])
+
   return (
-       // Form container with Tailwind styles
-      <form onSubmit={onSubmitHandler} className='flex flex-col items-center w-[90] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800'>
+    <form onSubmit={onSubmitHandler} className='flex flex-col items-center w-[90] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800'>
 
-           {/* Title and underline (changes between Login/Sign Up) */}
-        <div className='inline-flex items-center gap-2 mb-2 mt-10'>
-          <p className='font-libre-baskerville text-3xl'>{currentState}</p>
-          <hr className='border-none h-[1.5px] w-8 bg-gray-800' />
-        </div>
+      <div className='inline-flex items-center gap-2 mb-2 mt-10'>
+        <p className='font-libre-baskerville text-3xl'>{currentState}</p>
+        <hr className='border-none h-[1.5px] w-8 bg-gray-800' />
+      </div>
 
-         {/* Show name input only when on Sign Up */}
-        {currentState === 'Login' ? '' : <input type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='name' required />  }
-         {/* Always show email input */}
-        <input type="email" className='w-full px-3 py-2 border border-gray-800' placeholder='Email' required />
-         {/* Always show password input */}
-        <input type="password" className='w-full px-3 py-2 border border-gray-800' placeholder='Password' required />
+      {currentState === 'Login' ? '' : <input onChange={(e) => setName(e.target.value)} value={name} type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='name' required />}
+      <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" className='w-full px-3 py-2 border border-gray-800' placeholder='Email' required />
+      <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" className='w-full px-3 py-2 border border-gray-800' placeholder='Password' required />
 
-         {/* Small links: forgot password + toggle between Login/Sign Up */}
-        <div className='w-full flex justify-between text-sm mt-[-8px]'>
-          <p className='cursor-pointer'>Forgot Your Password?</p>
-          {
-            currentState === 'Login'
-            ? <p onClick={()=>setCurrentState('Sign Up')} className='cursor-pointer'>Create Account</p>
-            : <p onClick={()=>setCurrentState('Login')} className='cursor-pointer'>Login Here</p>
-          }
-        </div>
-        
-        {/* Button text changes depending on state */}
-        <button className='bg-black text-white font-light px-8 py-2 mt-4'>{currentState === 'Login' ? 'Sign In' : 'Sign Up'}</button>
-        
-      </form>
+      <div className='w-full flex justify-between text-sm mt-[-8px]'>
+        <p className='cursor-pointer'>Forgot Your Password?</p>
+        {
+          currentState === 'Login'
+            ? <p onClick={() => setCurrentState('Sign Up')} className='cursor-pointer'>Create Account</p>
+            : <p onClick={() => setCurrentState('Login')} className='cursor-pointer'>Login Here</p>
+        }
+      </div>
+
+      <button className='bg-black text-white font-light px-8 py-2 mt-4'>{currentState === 'Login' ? 'Sign In' : 'Sign Up'}</button>
+
+    </form>
   )
 }
 
