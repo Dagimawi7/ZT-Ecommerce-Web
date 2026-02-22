@@ -5,8 +5,11 @@ import {
   addProduct,
   removeProduct,
   singleProduct,
+  relatedProducts
 } from "../controllers/productController.js";
 import upload from "../middleware/multer.js";
+
+import adminAuth from "../middleware/adminAuth.js";
 
 // Creating a new router for handling product-related routes
 const productRouter = express.Router();
@@ -14,6 +17,7 @@ const productRouter = express.Router();
 // Route to add a new product with up to 4 uploaded images
 productRouter.post(
   "/add",
+  adminAuth,
   upload.fields([
     { name: "image1", maxCount: 1 },
     { name: "image2", maxCount: 1 },
@@ -24,10 +28,13 @@ productRouter.post(
 );
 
 // Route to remove a product (POST request)
-productRouter.post("/remove", removeProduct);
+productRouter.post("/remove", adminAuth, removeProduct);
 
 // Route to get details of a single product (POST request)
 productRouter.post("/single", singleProduct);
+
+// Route to get related products
+productRouter.post("/related", relatedProducts);
 
 // Route to list all products (GET request)
 productRouter.get("/list", listProducts);

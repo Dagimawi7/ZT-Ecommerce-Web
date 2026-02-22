@@ -12,7 +12,12 @@ const productSchema = new mongoose.Schema({
     subCategory: { type: String, required: true },   // Sub-category of product (text, required)
     sizes: { type: Array, required: true },          // Array of available sizes (required)
     bestseller: { type: Boolean },                   // Whether product is a bestseller (true/false)
-    date: { type: Number, required: true }           // Date added (timestamp, required)
+    date: { type: Number, required: true },          // Date added (timestamp, required)
+    salePrice: { type: Number, default: null },      // Discounted sale price
+    onSale: { type: Boolean, default: false },       // Whether product is currently on sale
+    featured: { type: Boolean, default: false },     // Whether product is featured
+    earlyAccess: { type: Boolean, default: false },  // Member-only early access
+    memberPrice: { type: Number, default: null }     // Special member pricing
 });
 
 // Create the product model

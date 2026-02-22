@@ -11,6 +11,9 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true }, // User's email (required and must be unique)
     password: { type: String, required: true }, // User's password (required)
     cartData: { type: Object, default: {} }, // Stores shopping cart info (default is empty object)
+    role: { type: String, default: 'user', enum: ['user', 'admin', 'member'] }, // User role for RBAC
+    memberSince: { type: Date, default: null }, // When membership started
+    membershipActive: { type: Boolean, default: false }, // Whether user has active membership
   },
   { minimize: false }
 ); // Keep empty objects in the database instead of removing them
