@@ -5,7 +5,9 @@ import {
   addProduct,
   removeProduct,
   singleProduct,
-  relatedProducts
+  relatedProducts,
+  getFeaturedProducts,
+  getOnSaleProducts
 } from "../controllers/productController.js";
 import upload from "../middleware/multer.js";
 
@@ -38,6 +40,12 @@ productRouter.post("/related", relatedProducts);
 
 // Route to list all products (GET request)
 productRouter.get("/list", listProducts);
+
+// Route to get featured products
+productRouter.get("/featured", getFeaturedProducts);
+
+// Route to get on-sale products
+productRouter.get("/on-sale", getOnSaleProducts);
 
 // Exporting the router so it can be used in other files
 export default productRouter;

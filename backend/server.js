@@ -9,8 +9,9 @@ import connectDB from "./config/mongodb.js";
 import connectCloudinary from "./config/cloudinary.js";
 import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
-
 import orderRouter from "./routes/orderRoute.js";
+import promotionRouter from "./routes/promotionRoute.js";
+import analyticsRouter from "./routes/analyticsRoute.js";
 
 // App Config
 // Create an Express app
@@ -36,10 +37,17 @@ app.use((req, res, next) => {
 app.use("/api/user", userRouter);
 app.use("/api/product", productRouter);
 app.use("/api/order", orderRouter);
+app.use("/api/promo", promotionRouter);
+app.use("/api/analytics", analyticsRouter);
 
 // Error Handling Middleware
 import { errorHandler } from "./middleware/errorMiddleware.js";
 app.use(errorHandler);
+
+// Config Mode route for Staging vs Production
+app.get("/api/config/mode", (req, res) => {
+  res.json({ success: true, mode: process.env.APP_MODE || "production" });
+});
 
 // Create a GET route at '/' that sends a message back
 app.get("/", (req, res) => {
