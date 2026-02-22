@@ -4,23 +4,14 @@ import Title from './Title';
 import ProductItem from './ProductItem';
 
 const FeaturedProducts = () => {
-    const { backendUrl } = useContext(ShopContext);
+    const { products } = useContext(ShopContext);
     const [featuredProducts, setFeaturedProducts] = useState([]);
 
     useEffect(() => {
-        const fetchFeatured = async () => {
-            try {
-                const response = await fetch(`${backendUrl}/api/product/featured`);
-                const data = await response.json();
-                if (data.success) {
-                    setFeaturedProducts(data.products.slice(0, 4)); // Get top 4
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchFeatured();
-    }, [backendUrl]);
+        if (products && products.length > 0) {
+            setFeaturedProducts(products.filter(item => item.featured).slice(0, 4));
+        }
+    }, [products]);
 
     if (featuredProducts.length === 0) return null;
 

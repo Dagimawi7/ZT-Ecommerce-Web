@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { products as initialProducts } from "../assets/assets";
 
 export const ShopContext = createContext();
 
@@ -11,8 +12,8 @@ const ShopContextProvider = (props) => {
     const currency = '$';
     const delivery_fee = 10;
 
-    // Core State
-    const [products, setProducts] = useState([]);
+    // Core State - deep clone the assets to prevent reference issues
+    const [products, setProducts] = useState(JSON.parse(JSON.stringify(initialProducts)));
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false)
     const [cartItems, setCartItems] = useState({});
@@ -32,14 +33,11 @@ const ShopContextProvider = (props) => {
         try {
             const response = await fetch(`${backendUrl}/api/product/list`);
             const data = await response.json();
-            if (data.success) {
+            if (data.success && data.products.length > 0) {
                 setProducts(data.products);
-            } else {
-                toast.error(data.message);
             }
         } catch (error) {
-            console.log(error);
-            toast.error(error.message);
+            console.log("Could not fetch products from backend. Falling back to local assets.", error);
         }
     };
 
