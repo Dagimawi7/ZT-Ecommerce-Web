@@ -10,6 +10,8 @@ import connectCloudinary from "./config/cloudinary.js";
 import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
 
+import orderRouter from "./routes/orderRoute.js";
+
 // App Config
 // Create an Express app
 const app = express();
@@ -24,9 +26,20 @@ app.use(express.json());
 // Allows frontend to access backend from another domain/port
 app.use(cors());
 
+// Simple Request Logging Middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
 // API Endpoints
 app.use("/api/user", userRouter);
-app.use("/api/productRouter", productRouter);
+app.use("/api/product", productRouter);
+app.use("/api/order", orderRouter);
+
+// Error Handling Middleware
+import { errorHandler } from "./middleware/errorMiddleware.js";
+app.use(errorHandler);
 
 // Create a GET route at '/' that sends a message back
 app.get("/", (req, res) => {

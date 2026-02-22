@@ -30,7 +30,7 @@ const loginUser = async (req, res) => {
     // If passwords match, create a token and send it back
     if (isMatch) {
       const token = createToken(user._id);
-      res.json({ success: true, token });
+      res.json({ success: true, token, user: { name: user.name, email: user.email, role: user.role, membershipActive: user.membershipActive } });
     } else {
       // If passwords don't match, send an "invalid credentials" message
       res.json({ success: false, message: "Invalid credentials" });
@@ -92,7 +92,7 @@ const registerUser = async (req, res) => {
     const token = createToken(user._id);
 
     // Send success response with the token
-    res.json({ success: true, token });
+    res.json({ success: true, token, user: { name: user.name, email: user.email, role: user.role, membershipActive: user.membershipActive } });
   } catch (error) {
     // If any error happens, log it and send an error message
     console.log(error);
@@ -105,8 +105,65 @@ const registerUser = async (req, res) => {
 // 'req' contains admin credentials
 // 'res' sends back the login result
 const adminLogin = async (req, res) => {
-    
+  try {
+    const { email, password } = req.body;
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.json({ success: false, message: "User doesn't exist" });
+    }
+
+    if (user.role !== 'admin') {
+      return res.json({ success: false, message: "Not authorized as admin" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (isMatch) {
+      const token = createToken(user._id);
+      res.json({ success: true, token, user: { name: user.name, email: user.email, role: user.role, membershipActive: user.membershipActive } });
+    } else {
+      res.json({ success: false, message: "Invalid credentials" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// Route for upgrading user to "member"
+const upgradeMembership = async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    if (!userId) {
+      return res.json({ success: false, message: "User ID is required" });
+    }
+
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    if (user.role === 'member') {
+      return res.json({ success: false, message: "User is already a member" });
+    }
+
+    // Retain admin role if exists, otherwise member
+    const newRole = user.role === 'admin' ? 'admin' : 'member';
+
+    await userModel.findByIdAndUpdate(userId, {
+      role: newRole,
+      memberSince: new Date(),
+      membershipActive: true
+    });
+
+    res.json({ success: true, message: "Membership upgraded successfully" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
 };
 
 // Export the functions so they can be used in other files (like your router)
-export { loginUser, registerUser, adminLogin };
+export { loginUser, registerUser, adminLogin, upgradeMembership };
