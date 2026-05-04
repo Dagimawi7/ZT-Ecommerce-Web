@@ -14,11 +14,19 @@ const BestSeller = () => {
   // state to store the best seller products
   const [bestSeller, setBestSeller] = useState([]);
 
+  // state to store which button version user gets (A or B)
+  const [buttonVariant, setButtonVariant] = useState('A');
+
+
   useEffect(()=> {
     // Filters only products that have bestseller = true
     const bestProduct = products.filter((item)=>(item.bestseller));
     // Takes only the first 5 best sellers
     setBestSeller(bestProduct.slice(0,5))
+    
+    // coin flip logic to determine which button version the user gets (A or B)
+    const randomVariant = Math.random() < 0.5 ? 'A' : 'B';
+    setButtonVariant(randomVariant);
   }, [])
 
   return (
@@ -38,6 +46,19 @@ const BestSeller = () => {
         }
       </div>
 
+      {/* A/B Test Button */}
+      <div className='text-center mt-10'>
+        <button 
+          className={
+            buttonVariant === 'A' 
+              ? "bg-black text-white px-8 py-3 text-sm active:bg-gray-700" 
+              : "border border-black text-black px-8 py-3 text-sm hover:bg-black hover:text-white transition-all"
+          }
+          onClick={() => console.log(`A/B Test: User clicked variant ${buttonVariant}`)}
+        >
+          View All Best Sellers
+        </button>
+      </div>
 
 
 
